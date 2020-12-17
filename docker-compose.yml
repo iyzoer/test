@@ -1,0 +1,36 @@
+version: '3.4'
+services:
+  web:
+    image: nginx:stable-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./assets/dist:/var/www/html
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/default.conf
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - COMPOSER_HOME=/tmp
+    working_dir: /var/www/html
+    command: make run
+    user: ${UID:-1000}:${GID:-1000}
+  postgres:
+    image: library/postgres:12-alpine
+    environment:
+      - POSTGRES_PASSWORD=module
+      - POSTGRES_USER=module
+      - POSTGRES_DB=module
+  node:
+    image: "library/node:lts"
+    command: make watch
+    user: ${UID:-1000}:${GID:-1000}
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    environment:
+      - NODE_ENV=development
+      - HOME=/module

@@ -1,0 +1,39 @@
+
+.idea
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> front
+.cache
+.yarn
+
+.DS_Store
+node_modules
+/dist
+
+
+# local env files
+./assets/.env.local
+./assets/.env.*.local
+./assets/dist/
+
+# Log files
+./assets/npm-debug.log*
+./assets/yarn-debug.log*
+./assets/yarn-error.log*
+./assets/pnpm-debug.log*
+###< front
